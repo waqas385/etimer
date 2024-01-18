@@ -1,0 +1,14 @@
+{
+  "name": "etimer",
+  "version": "1.0.0",
+  "description": "Web app for setting time period for your daily tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Waqas Ahmed",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
