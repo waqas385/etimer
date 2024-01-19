@@ -1,7 +1,5 @@
-# Welcome to GitHub Desktop!
+# ETIMER
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+Etimer is a web-app that can be used to set timer for your daily routine tasks e.g lunch, tea etc
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
-
-Updated readme
+Project UI is build using tailwindcss and components are created in Vue 3.
