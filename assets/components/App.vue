@@ -6,15 +6,17 @@ const appData = ref([]);
 const time = ref("");
 const description = ref("");
 const startSound = new Audio("./../assets/tones/start-fire.mp3");
-const finishSound = new Audio('./../assets/tones/finish-celebration.wav');
+const finishSound = new Audio("./../assets/tones/finish-celebration.wav");
 const playIndex = ref(0);
+const resetButtonDisabled = ref(false);
 
 watch(playIndex, (newValue) => {
   if (appData.value[playIndex.value]) {
     appData.value[playIndex.value].isStart = true;
   }
   if (newValue === appData.value.length) {
-    finishSound.play().catch(e => alert(e));
+    resetButtonDisabled.value = false;
+    finishSound.play().catch((e) => alert(e));
   }
 });
 
@@ -22,14 +24,15 @@ function addTimePeriod() {
   appData.value.push({
     timer: time.value,
     description: description.value,
-    skipSound: false
+    skipSound: false,
   });
-  time.value = description.value =''; // reset
+  time.value = description.value = ""; // reset
 }
 
 function start() {
-  startSound.play().catch(e => alert(e));
+  startSound.play().catch((e) => alert(e));
   playIndex.value = 0;
+  resetButtonDisabled.value = true;
   appData.value[playIndex.value].isStart = true;
   // Skip sound for the last item
   const appDataCount = appData.value.length;
@@ -41,7 +44,7 @@ function updatePlayingIndex() {
 }
 
 function reset() {
-  appData.value = appData.value.map(timer => {
+  appData.value = appData.value.map((timer) => {
     timer.isStart = false;
     return timer;
   });
@@ -96,7 +99,18 @@ function deleteTimePeriod(index) {
         Start
       </button>
       <button
-        class="ml-3 p-4 shadow-lg bg-red-500 border-r-slate-50 rounded-md"
+        class="ml-3 p-4 shadow-lg bg-blue-400 border-r-slate-50 rounded-md"
+        @click="save"
+      >
+        Save
+      </button>
+      <button
+        :class="[
+          'ml-3 p-4 shadow-lg border-r-slate-50 rounded-md',
+          { 'bg-red-500': !resetButtonDisabled },
+          { 'bg-red-400 text-gray-700': resetButtonDisabled },
+        ]"
+        :disabled="resetButtonDisabled"
         @click="reset"
       >
         Reset

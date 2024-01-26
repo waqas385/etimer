@@ -71,12 +71,14 @@ function startTimePeriod() {
       <div id="timerContainer">{{ formatTimer }}</div>
       <div>{{ description }}</div>
       <div class="flex">
-        <img
-          src="./../images/delete.svg"
-          width="56"
-          height="56"
-          @click="deleteTimeSlot"
-        />
+        <button title="Delete time">
+          <img
+            src="./../images/delete.svg"
+            width="40"
+            height="40"
+            @click="deleteTimeSlot"
+          />
+        </button>
       </div>
     </div>
   </div>
