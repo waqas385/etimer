@@ -1,12 +1,12 @@
 <script setup>
 import { ref, watch } from "vue";
-import TimePeriod from "../components/TimePeriod.vue";
+import TimePeriod from "@components/TimePeriod/TimePeriod.vue";
+import { playSound } from "./PlaySound.js";
 
 const appData = ref([]);
 const time = ref("");
 const description = ref("");
-const startSound = new Audio("./../assets/tones/start-fire.mp3");
-const finishSound = new Audio("./../assets/tones/finish-celebration.wav");
+// const finishSound = new Audio("./../assets/sounds/finish-celebration.wav");
 const playIndex = ref(0);
 const resetButtonDisabled = ref(false);
 
@@ -16,7 +16,8 @@ watch(playIndex, (newValue) => {
   }
   if (newValue === appData.value.length) {
     resetButtonDisabled.value = false;
-    finishSound.play().catch((e) => alert(e));
+    playSound('finish-celebration.wav');
+    // finishSound.play().catch((e) => alert(e));
   }
 });
 
@@ -24,13 +25,13 @@ function addTimePeriod() {
   appData.value.push({
     timer: time.value,
     description: description.value,
-    skipSound: false,
+    isSkipSound: false,
   });
   time.value = description.value = ""; // reset
 }
 
 function start() {
-  startSound.play().catch((e) => alert(e));
+  playSound('start-fire.mp3');
   playIndex.value = 0;
   resetButtonDisabled.value = true;
   appData.value[playIndex.value].isStart = true;

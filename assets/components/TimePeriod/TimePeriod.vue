@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
+import { playSound } from "@components/PlaySound"
 
 const EXERCISE_TIME_UNIT = 1000; // seconds
 const props = defineProps({
@@ -34,19 +35,18 @@ function timeFormater(timer) {
 
 // @click delete time period from data
 function deleteTimeSlot() {
-  emit('delete',props.timerIndex);
+  emit('delete', props.timerIndex);
 }
 
 // Start timer
 function startTimePeriod() {
   let timer = props.timer; // seconds
-  let sound = new Audio("./../assets/tones/change.m4a");
   timerFinished.value = false;
   let intervalID = setInterval(() => {
     --timer;
     if (timer === 0) {
       if (!props.isSkipSound) {
-        sound.play().catch(e => alert(e));
+        playSound("change.m4a");
       }
       clearInterval(intervalID);
       timerFinished.value = true;
@@ -60,24 +60,17 @@ function startTimePeriod() {
 </script>
 
 <template>
-  <div
-    :class="[
-      'text-5xl clock rounded-xl p-4 shadow-lg border mb-4',
-      { 'shadow-red-700 border-red-700': isStart && timerFinished },
-      { 'shadow-green-700 border-green-700': isStart && !timerFinished },
-    ]"
-  >
+  <div :class="[
+    'text-5xl clock rounded-xl p-4 shadow-lg border mb-4',
+    { 'shadow-red-700 border-red-700': isStart && timerFinished },
+    { 'shadow-green-700 border-green-700': isStart && !timerFinished },
+  ]">
     <div class="flex justify-between">
       <div id="timerContainer">{{ formatTimer }}</div>
       <div>{{ description }}</div>
       <div class="flex">
         <button title="Delete time">
-          <img
-            src="./../images/delete.svg"
-            width="40"
-            height="40"
-            @click="deleteTimeSlot"
-          />
+          <img src="./images/delete.svg" width="40" height="40" @click="deleteTimeSlot" />
         </button>
       </div>
     </div>
