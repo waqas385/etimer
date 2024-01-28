@@ -6,7 +6,6 @@ import { playSound } from "./PlaySound.js";
 const appData = ref([]);
 const time = ref("");
 const description = ref("");
-// const finishSound = new Audio("./../assets/sounds/finish-celebration.wav");
 const playIndex = ref(0);
 const resetButtonDisabled = ref(false);
 
@@ -17,7 +16,6 @@ watch(playIndex, (newValue) => {
   if (newValue === appData.value.length) {
     resetButtonDisabled.value = false;
     playSound('finish-celebration.wav');
-    // finishSound.play().catch((e) => alert(e));
   }
 });
 
