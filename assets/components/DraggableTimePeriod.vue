@@ -1,28 +1,49 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, defineEmits } from 'vue';
 import draggable from "vuedraggable";
-import TimePeriod from "./TimePeriod/TimePeriod.vue";
+import TimePeriod from "@components/TimePeriod/TimePeriod.vue";
+import { playSound } from "./PlaySound.js";
 
-const props = defineProps({
-  timePeriods: []
+const timePeriods = defineModel();
+const playIndex = ref(0);
+const emit = defineEmits(['finish']);
+
+watch(playIndex, (newValue) => {
+  if (timePeriods.value[playIndex.value]) {
+    timePeriods.value[playIndex.value].isStart = true;
+  }
+  if (newValue === timePeriods.value.length) {
+    playSound("finish-celebration.wav");
+    emit('finish');
+    // Reset playIndex
+    playIndex.value = 0;
+  }
 });
-const timePeriodsRef = ref(props.timePeriods);
-// const drag = ref(false);
+
+function updatePlayingIndex() {
+  playIndex.value = playIndex.value + 1;
+}
+
+function deleteTimePeriod(index) {
+  timePeriods.value.splice(index, 1);
+}
 
 </script>
 <template>
   <draggable
-    v-model="timePeriodsRef"
-    group="timeperiods"
+    v-model="timePeriods"
+    group="people"
     item-key="id"
-    >
-    <!-- @start="drag = true"
-    @end="drag = false" -->
+  >
     <template #item="{ element }">
       <TimePeriod
         :timer="element.timer"
         :description="element.description"
         :timer-index="element.id"
+        :is-start="element.isStart"
+        :is-skip-sound="element.isSkipSound"
+        @finish="updatePlayingIndex"
+        @delete="deleteTimePeriod"
       />
     </template>
   </draggable>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { playSound } from "@components/PlaySound"
+import { playSound } from "@components/PlaySound";
 
 const EXERCISE_TIME_UNIT = 1000; // seconds
 const props = defineProps({
@@ -61,7 +61,7 @@ function startTimePeriod() {
 
 <template>
   <div :class="[
-    'text-5xl clock rounded-xl p-4 shadow-lg border mb-4',
+    'text-5xl clock rounded-xl p-4 shadow-lg border mb-6 cursor-move',
     { 'shadow-red-700 border-red-700': isStart && timerFinished },
     { 'shadow-green-700 border-green-700': isStart && !timerFinished },
   ]">

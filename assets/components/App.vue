@@ -1,35 +1,17 @@
 <script setup>
-import { ref, watch } from "vue";
-// import TimePeriod from "@components/TimePeriod/TimePeriod.vue";
+import { ref } from "vue";
 import { playSound } from "./PlaySound.js";
-// import draggable from "vuedraggable";
 import DraggableTimePeriod from "@components/DraggableTimePeriod.vue";
-import DraggableExample from "./DraggableExample.vue";
-import DraggableExample2 from "./DraggableExample2.vue";
 
 let appDataCounter = 0;
-// const timePeriods = defineModel('timePeriods');
-const timePeriods = ref([]);//defineModel();
+const timePeriods = ref([]);
 const time = ref("");
 const description = ref("");
-const playIndex = ref(0);
 const resetButtonDisabled = ref(false);
 
-timePeriods.value = []; // Initialize 
-
-watch(playIndex, (newValue) => {
-  if (timePeriods.value[playIndex.value]) {
-    timePeriods.value[playIndex.value].isStart = true;
-  }
-  if (newValue === timePeriods.value.length) {
-    resetButtonDisabled.value = false;
-    playSound("finish-celebration.wav");
-  }
-});
-
-let counterTest = 5;
+timePeriods.value = []; // Initialize
 function addTimePeriod() {
-  if (time.value.trim() === '' || description.value.trim() === '') {
+  if (time.value.trim() === "" || description.value.trim() === "") {
     return; // do nothing
   }
   timePeriods.value.push({
@@ -38,77 +20,26 @@ function addTimePeriod() {
     description: description.value,
     isSkipSound: false,
   });
-  /*
-  myArray.value.push({
-    id: ++counterTest,
-    timer: time.value,
-    description: description.value,
-    isSkipSound: false,
-  })
-  */
   time.value = description.value = ""; // reset
 }
 
 function start() {
   playSound("start-fire.mp3");
-  playIndex.value = 0;
   resetButtonDisabled.value = true;
-  timePeriods.value[playIndex.value].isStart = true;
-  // Skip sound for the last item
-  const appDataCount = timePeriods.value.length;
-  timePeriods.value[appDataCount - 1].isSkipSound = true;
-}
 
-function updatePlayingIndex() {
-  playIndex.value = playIndex.value + 1;
+  const TIME_PERIODS_START_INDEX = 0;
+  timePeriods.value[TIME_PERIODS_START_INDEX].isStart = true;
+  // Skip sound for the last item
+  // timePeriods.value[timePeriods.value.length - 1].isSkipSound = true;
 }
 
 function reset() {
-  timePeriods.value = timePeriods.value.map((timer) => {
+  timePeriods.value = timePeriods.value.map((timer, timerIndex) => {
     timer.isStart = false;
+    timer.isSkipSound = timerIndex === timePeriods.value.length - 1;
     return timer;
   });
 }
-
-function deleteTimePeriod(index) {
-  timePeriods.value.splice(index, 1);
-}
-
-const myArray = defineModel('myArray');
-/*
-myArray.value = [
-  {
-    "id":0,
-    "timer": "5",
-    "description": "test 1",
-    "isSkipSound": false
-  },
-  {
-    "id":1,
-    "timer": "5",
-    "description": "test 2",
-    "isSkipSound": false
-  },
-  {
-    "id":2,
-    "timer": "5",
-    "description": "test 3",
-    "isSkipSound": false
-  },
-  {
-    "id":3,
-    "timer": "5",
-    "description": "test 4",
-    "isSkipSound": false
-  },
-  {
-    "id":4,
-    "timer": "5",
-    "description": "test 5",
-    "isSkipSound": false
-  }
-];
-*/
 </script>
 
 <template>
@@ -137,46 +68,10 @@ myArray.value = [
         <img src="./../images/addtime.svg" height="24" width="24" />&nbsp;Add
       </button>
     </div>
-    <h2>Example One</h2>
-    <DraggableExample v-model="myArray" />
-    <!-- <draggable
-      v-model="myArray"
-      group="people"
-      @start="drag = true"
-      @end="drag = false"
-      item-key="id"
-    >
-      <template #item="{ element }">
-        <TimePeriod
-          :timer="element.timer"
-          :description="element.description"
-          :timer-index="element.id"
-        />
-      </template>
-    </draggable> -->
-    <!-- <draggable
+    <DraggableTimePeriod
       v-model="timePeriods"
-      group="time"
-      @start="drag = true"
-      @end="drag = false"
-      item-key="name"
-    >
-      <template #item="{ timePeriod }">
-        <TimePeriod
-          :timer="timePeriod.timer"
-          :description="timePeriod.description"
-          :timer-index="timePeriod.id"
-          :is-start="timePeriod.isStart"
-          :is-skip-sound="timePeriod.isSkipSound"
-          @finish="updatePlayingIndex"
-          @delete="deleteTimePeriod"
-        />
-      </template>
-    </draggable> -->
-    <h2>Example 2</h2>
-    <DraggableTimePeriod :time-periods="timePeriods"/>
-    <h3>Example 3</h3>
-    <DraggableExample2 v-model="timePeriods" />
+      @finish="resetButtonDisabled = false"
+    />
     <div class="pt-2">
       <button
         class="p-4 shadow-lg bg-blue-400 border-r-slate-50 rounded-md"
