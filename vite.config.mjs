@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     /*something*/
     alias: {
-      /* Add /@sounds resolved alias problem for sounds */ 
+      /* Added '/@sounds' resolved alias problem for sounds */ 
       '/@sounds': 'assets/sounds', 
       '@components': '/assets/components'
     },
