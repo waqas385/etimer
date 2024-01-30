@@ -26,11 +26,11 @@ function addTimePeriod() {
 function start() {
   playSound("start-fire.mp3");
   resetButtonDisabled.value = true;
-
   const TIME_PERIODS_START_INDEX = 0;
   timePeriods.value[TIME_PERIODS_START_INDEX].isStart = true;
   // Skip sound for the last item
-  // timePeriods.value[timePeriods.value.length - 1].isSkipSound = true;
+  timePeriods.value[timePeriods.value.length - 1].isSkipSound = true;
+  // TODO - Known issue if I click start again then timmer not works correctly
 }
 
 function reset() {
