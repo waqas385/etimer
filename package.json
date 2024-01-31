@@ -1,0 +1,26 @@
+{
+  "name": "etimer",
+  "version": "1.0.0",
+  "description": "Web app for setting time period for your daily tasks",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tailwindcss": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch"
+  },
+  "author": "Waqas Ahmed",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.3",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.12",
+    "vue": "^3.4.15"
+  },
+  "dependencies": {
+    "vuedraggable": "^4.1.0"
+  }
+}

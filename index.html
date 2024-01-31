@@ -1,57 +1,21 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>etimer</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='./assets/css/main.css'>
-    <link rel="icon" type="image/x-icon" href="./assets/images/stopwatch.svg">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./assets/css/main.css"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/images/stopwatch.svg" />
+  </head>
 
-<body>
-    <div>
-        <div class="flex">
-            <input type="text" placeholder="time in seconds" id="earthLifeTime" />&nbsp;
-            <input type="text" placeholder="Description..." id="earthLifeTimeDescription" />&nbsp;
-            <button class="flex flex_align_center" onclick="addEarthLife()">
-                <img src="./assets/images/addtime.svg"
-                    height="24" width="24">&nbsp;Add
-            </button>
-        </div>
-        <br />
-        <div id="timer"></div>
-        <button onclick="timeBegins()">Start</button>
-        <button onclick="reset()">Reset</button>
-    </div>
-    <!-- time slot template -->
-    <div id="timeSlotTemplate" class="is-hidden">
-        <div id="__id__" class="clock">
-            <div class="flex flex_spacing_between flex_align_center">
-                <div id="timerContainer">__timer__</div>
-                <div>__description__</div>
-                <div class="flex flex_align_center">
-                    <img src="./assets/images/delete.svg"
-                        width="56" height="56" onclick="deleteTimeSlot(__index__)">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- time slot template -->
-    
-    <div id="settingsTemplate" class="is-hidden">
-        <div>
-            <label for="startSound">Start sound</label>
-            <input id="startSound" type="file" />
-        </div>
-        <div>
-            <label for="endSound">End sound</label>
-            <input id="endSound" type="file" />
-        </div>
-        <button onclick="saveSetting(_index_)">Save</button>&nbsp;<button onclick="closeSetting()">Close</button>
-    </div>
-    <script src="./assets/js/app.js"></script>
-</body>
-
+  <body class="font-sans">
+    <div id="app"></div>
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
 </html>
