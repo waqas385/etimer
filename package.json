@@ -13,11 +13,11 @@
   "author": "Waqas Ahmed",
   "license": "ISC",
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.3",
+    "@vitejs/plugin-vue": "^5.2.4",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.4.21",
+    "vite": "^7.2.7",
     "vue": "^3.4.15"
   },
   "dependencies": {
