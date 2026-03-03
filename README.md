@@ -2,6 +2,9 @@
 
 A beautiful and interactive timer application built with Vue 3 and TypeScript. Perfect for managing multiple timed tasks with visual feedback and sound effects.
 
+**App Preview**
+![My etimer app preview image](https://waqasahmed.pk/myetimer/etimer-preview.png)
+
 **DEMO** <https://waqasahmed.pk/myetimer/>
 
 ## ✨ Features
