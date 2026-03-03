@@ -110,7 +110,6 @@ Adjust `TICK_INTERVAL` in `TimePeriod.vue` (default: 1000ms)
 
 ## 📝 Notes
 
-- Tasks are automatically saved to browser localStorage
 - Sounds are pre-loaded to eliminate playback delays
 - Works on all modern browsers
 
